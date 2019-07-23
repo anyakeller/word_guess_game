@@ -11,7 +11,8 @@ Table of Contents
         - [Main Git branch Commands](#main-git-branch-commands)
   - [Log Format Template:](#log-format-template)
 - [LOG](#log)
-      - [July 23, 2019 - Branches: 2](#july-23-2019---branches-2)
+      - [July 23, 2019 ~ 14:00 - Branches: 2](#july-23-2019--1400---branches-2)
+      - [July 23, 2019 - 14:15 - Branches: 2](#july-23-2019---1415---branches-2)
 
 ### Shortcuts for Markdown All in One Extention
 
@@ -64,7 +65,12 @@ $ git merge master
 
 ## LOG
 
-##### July 23, 2019 - Branches: 2
+##### July 23, 2019 ~ 14:00 - Branches: 2
 
 1. MASTER
 2. gridtesting
+
+##### July 23, 2019 - 14:15 - Branches: 2
+
+1. MASTER
+2. bootstraplayout
