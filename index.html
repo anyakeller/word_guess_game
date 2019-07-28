@@ -15,19 +15,20 @@
         <title>Document</title>
     </head>
     <body>
-        <!-- modal thingy -->
+        <!-- start new game modal thingy -->
         <div
             class="modal fade"
             id="modalthing"
             tabindex="-1"
             role="dialog"
-            aria-labelledby="exampleModalLabel"
+            aria-labelledby="ModalLabel"
             aria-hidden="true"
         >
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">
+                        <h1><span id="warn_restart"></span></h1>
+                        <h5 class="modal-title" id="ModalLabel">
                             Start Game?
                         </h5>
                         <button
@@ -40,15 +41,30 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>Press s to begin playing</p>
+                        <p>Press S to start the game!</p>
                         <p>Version: <span id="ver"></span></p>
                     </div>
-                    <div class="modal-footer">Press the X to exit</div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-dismiss="modal"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            id="new_game"
+                            type="button"
+                            class="btn btn-primary"
+                        >
+                            Start New Game
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
         <!-- header -->
-        <div class="jumbotron jumbotron-fluid py-4" style="margin-bottom: 0px">
+        <div class="jumbotron jumbotron-fluid py-3" style="margin-bottom: 0px">
             <div class="container">
                 <h1 class="display-4">Word Guessing Game</h1>
                 <p class="lead">
@@ -63,10 +79,16 @@
             >
         </nav>
         <!-- Content -->
-        <div id="main" class="container py-5">
+        <div id="main" class="container py-3">
             <div class="row">
                 <div class="py-5 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <p id="game_space"></p>
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <h1 class="display-4"></h1>
+                            <p class="lead"></p>
+                            <div id="game_space"></div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12 col-12">
                     <article>
@@ -97,7 +119,8 @@
             <div class="row my-5">
                 <div class="card mx-auto">
                     <div class="card-body">
-                        <h2>Chose Your Mode</h2>
+                        <h2>Start New Game</h2>
+                        <h3>Choose your mode</h3>
                         <button
                             type="button"
                             class="btn btn-primary mode"
@@ -141,38 +164,12 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"
         ></script>
-        <!-- Game -->
-        <script src="assets/js/game.js"></script>
         <!-- Button listeners -->
         <script>
-            // Basic inline button stuff
-            // give buttons click attribute
-            var modes = $(".mode");
-            var isPlay = false;
-
-            modes.click(function() {
-                if (isPlay) {
-                    alert("you're already in a game!");
-                } else {
-                    var version = this.value;
-
-                    $("#modalthing").modal("show");
-                    $("#ver").text(version);
-                    document.onkeyup = function(event) {
-                        var k = event.key;
-                        if (k === "s") {
-                            var currg = new tos();
-                            console.log(version);
-                            currg.play();
-                            if (currg.playing) {
-                                console.log("game started");
-                            }
-                            isPlay = true;
-                        }
-                        //$("#modalthing").modal("hide");
-                    };
-                }
-            });
+            $(".jumbotron").hide();
         </script>
+        <!-- Game -->
+        <script src="assets/js/game.js"></script>
+        <script src="assets/js/htmlelements.js"></script>
     </body>
 </html>

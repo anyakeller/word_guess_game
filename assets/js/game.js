@@ -12,6 +12,15 @@ class tos extends Game {
         super();
     }
     play() {
+        this.playing = true;
         this.game_num++;
+        $(".jumbotron").show();
+    }
+    endgame() {
+        this.playing = false;
+        this.game_num--;
+    }
+    closegame() {
+        $(".jumbotron").hide();
     }
 }
