@@ -39,7 +39,10 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body"><p>Type to begin</p></div>
+                    <div class="modal-body">
+                        <p>Press s to begin playing</p>
+                        <p>Version: <span id="ver"></span></p>
+                    </div>
                     <div class="modal-footer">Press the X to exit</div>
                 </div>
             </div>
@@ -60,10 +63,10 @@
             >
         </nav>
         <!-- Content -->
-        <div class="container py-5">
+        <div id="main" class="container py-5">
             <div class="row">
-                <div class="py-5 col-lg-4 col-md-4 col-sm-12 col-12">
-                    <p>afkjadsfjkladfs</p>
+                <div class="py-5 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <p id="game_space"></p>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12 col-12">
                     <article>
@@ -97,21 +100,21 @@
                         <h2>Chose Your Mode</h2>
                         <button
                             type="button"
-                            class="btn btn-primary"
+                            class="btn btn-primary mode"
                             value="tos"
                         >
                             TOS
                         </button>
                         <button
                             type="button"
-                            class="btn btn-primary"
+                            class="btn btn-primary mode"
                             value="tng"
                         >
                             TNG
                         </button>
                         <button
                             type="button"
-                            class="btn btn-danger"
+                            class="btn btn-danger mode"
                             value="both"
                         >
                             Both
@@ -144,12 +147,31 @@
         <script>
             // Basic inline button stuff
             // give buttons click attribute
-            var btns = $(".btn");
-            var game = new start_game();
-            btns.click(function() {
-                var version = this.value;
-                game.confirm_begin();
-                game.play(version);
+            var modes = $(".mode");
+            var isPlay = false;
+
+            modes.click(function() {
+                if (isPlay) {
+                    alert("you're already in a game!");
+                } else {
+                    var version = this.value;
+
+                    $("#modalthing").modal("show");
+                    $("#ver").text(version);
+                    document.onkeyup = function(event) {
+                        var k = event.key;
+                        if (k === "s") {
+                            var currg = new tos();
+                            console.log(version);
+                            currg.play();
+                            if (currg.playing) {
+                                console.log("game started");
+                            }
+                            isPlay = true;
+                        }
+                        //$("#modalthing").modal("hide");
+                    };
+                }
             });
         </script>
     </body>
