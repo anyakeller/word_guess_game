@@ -7,18 +7,10 @@ var newG = $("#new_game"); //new game button
 //GLOBAL VARIABLES
 var version; //version
 var isPlay = false; //global check if the game is being played
-var mainG; //I forgot
+var currentG; //I forgot what this does
 
-// Helper to check if the game is started
-// function confirmstartkey(version) {
-//     document.onkeyup = function(event) {
-//         var k = event.key;
-//         if (k === "s") {
-//             gamething(version);
-//         }
-//         $("#modalthing").modal("hide");
-//     };
-// }
+//keps track of all the games
+var tracker = new Game();
 
 // Start Mode Button Listeners
 modes.click(function() {
@@ -42,11 +34,8 @@ newG.click(function() {
 
 // Run Game
 function gamething(version) {
-    mainG = new tos();
+    currentG = new tos();
     console.log(version);
-    mainG.play();
-    if (mainG.playing) {
-        console.log("game started");
-    }
+    currentG.initplay();
     isPlay = true;
 }

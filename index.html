@@ -12,7 +12,7 @@
             crossorigin="anonymous"
         />
 
-        <title>Document</title>
+        <title>Star Trek Hangman</title>
     </head>
     <body>
         <!-- start new game modal thingy -->
@@ -41,9 +41,10 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>Press S to start the game!</p>
+                        <p>Press Start Game to Begin!</p>
                         <p>Version: <span id="ver"></span></p>
                     </div>
+                    <!-- Modal Controls -->
                     <div class="modal-footer">
                         <button
                             type="button"
@@ -81,15 +82,36 @@
         <!-- Content -->
         <div id="main" class="container py-3">
             <div class="row">
-                <div class="py-5 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div class="jumbotron jumbotron-fluid">
+                <!-- Game Space (hidden at first) -->
+                <div class="py-3 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div id="jumboGame" class="jumbotron jumbotron-fluid">
                         <div class="container">
-                            <h1 class="display-4"></h1>
-                            <p class="lead"></p>
-                            <div id="game_space"></div>
+                            <h1 class="display-4">Game Begin!</h1>
+                            <small class="text-muted">
+                                Instructions: Guess the word by pressing the
+                                letter you want to guess. Your guesses are
+                                limited in number so get rekt.
+                            </small>
+                            <br /><br />
+                            <h4>Round Info</h4>
+                            <div id="round_info">
+                                <dl class="row">
+                                    <dt class="col-sm-3">Guesses Left</dt>
+                                    <dd id="guess_left" class="col-sm-9">
+                                        asdf
+                                    </dd>
+
+                                    <dt class="col-sm-3">Letters Used</dt>
+                                    <dd id="letters_used" class="col-sm-9">
+                                        asdf
+                                    </dd>
+                                </dl>
+                            </div>
+                            <div class="row" id="game_space"></div>
                         </div>
                     </div>
                 </div>
+                <!-- Game Description -->
                 <div class="col-lg-8 col-md-8 col-sm-12 col-12">
                     <article>
                         <h2>Welcome to the Starship Enterprise!</h2>
@@ -104,8 +126,8 @@
                     <article>
                         <h2>Here's what you have to do:</h2>
                         <p>
-                            JK you don't have to do anything. This is just a
-                            word guessing game.
+                            JK you don't have to do anything. This is just
+                            hangman.
                         </p>
                         <b>HOW IS THAT SUPPOSED TO HELP??!?!?!?</b>
                         <p>
@@ -166,7 +188,7 @@
         ></script>
         <!-- Button listeners -->
         <script>
-            $(".jumbotron").hide();
+            //$("#jumboGame").hide();
         </script>
         <!-- Game -->
         <script src="assets/js/game.js"></script>

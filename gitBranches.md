@@ -13,6 +13,7 @@ Table of Contents
 - [LOG](#log)
       - [July 23, 2019 ~ 14:00 - Branches: 2](#july-23-2019--1400---branches-2)
       - [July 23, 2019 - 14:15 - Branches: 2](#july-23-2019---1415---branches-2)
+      - [July 28, 2019 - 13:58 - Branches: 2](#july-28-2019---1358---branches-2)
 
 ### Shortcuts for Markdown All in One Extention
 
@@ -74,3 +75,8 @@ $ git merge master
 
 1. MASTER
 2. bootstraplayout
+
+##### July 28, 2019 - 13:58 - Branches: 2
+
+1. Master
+2. theWeeds
