@@ -27,6 +27,7 @@ class trek extends Game {
         };
         this.word_bank = {}; //with hints
         this.unused_words; //list of key words
+        this.asciiletterBank = [];
     }
     //gets a random word from an array
     get_random_index(freshbank) {
@@ -35,30 +36,103 @@ class trek extends Game {
     }
     //game start
     initplay() {
+        // for (var i = 65; i <= 90; i++) {
+        //     //set up letter bank
+        //     this.asciiletterBank.push(i); //String.fromCharCode() reverses
+        // }
+        for (var i = 97; i <= 122; i++) {
+            //set up letter bank
+            this.asciiletterBank.push(i); //String.fromCharCode(code) reverses or str.charCodeAt(index);
+        }
+
         this.playing = true;
-        this.game_num++;
         $("#jumboGame").show();
         console.log("game started");
-
-        this.oneRound();
     }
 
-    oneRound() {
+    // The full game
+    playit() {
+        this.game_num++;
         // get random word
         var randomindex = this.get_random_index(this.unused_words);
         var ranword = this.unused_words[randomindex];
+
         this.unused_words.splice(randomindex, 1); //remove the random index word
-        console.log(ranword);
-        document.onkeyup = function(event) {
-            var k = event.key;
-            console.log("pressed key: " + k);
-        };
+
+        var max_tries = 10; // add algo to generate later
+        var tries_used = 0;
+        var temparranword = ranword.split("");
+        console.log(temparranword);
+        var arrranword = [];
+        for (var k = 0; k < temparranword.length; k++) {
+            arrranword.push(temparranword[k].charCodeAt(0));
+        }
+        //console.log(arrranword);
+        //var isWin = 0; //0 is playing, 1 is win, 2 is loss
+        var unusedchars = this.asciiletterBank;
+        return this.recursiveRound(
+            arrranword,
+            unusedchars,
+            max_tries,
+            tries_used
+        );
     }
 
-    // quit in the middle of a game
-    earlyQuit() {
-        this.game_num--;
-        console.log("engame triggered");
+    recursiveRound(arrayleft, unused, max_tries, tries_used) {
+        // takes the array of the letters left to guess
+        if (arrayleft.length == 0) {
+            return true;
+        } else if (tries_used == max_tries) {
+            return false;
+        }
+        var id = this;
+        $(document).keyup(function(event) {
+            console.log(arrayleft);
+            var getkey = event.key;
+            var k = getkey.charCodeAt(0);
+
+            console.log("pressed key: " + k);
+            // check if alpha
+            var isletter = id.asciiletterBank.indexOf(k);
+            if (isletter == -1) {
+                alert("bad key!");
+            } else if (unused.indexOf(k) == -1) {
+                alert("u used that already");
+            } else {
+                $(document).off("keyup");
+                tries_used++;
+                console.log("tries left: " + (max_tries - tries_used));
+                if (arrayleft.indexOf(k) == -1) {
+                    //if not in word
+                    console.log(k + " is not in the word");
+                    return id.recursiveRound(
+                        arrayleft,
+                        unused,
+                        max_tries,
+                        tries_used
+                    );
+                } else {
+                    console.log(k + " is in the word!");
+                    var templeft = arrayleft;
+                    var tempunused = unused;
+                    for (var j = 0; j < templeft.length; j++) {
+                        if (templeft[j] === k) {
+                            templeft.splice(j, 1);
+                            j--;
+                        }
+                    }
+                    var whereisunusedk = unused.indexOf(k);
+                    tempunused.splice(whereisunusedk, 1);
+
+                    return id.recursiveRound(
+                        templeft,
+                        tempunused,
+                        max_tries,
+                        tries_used
+                    );
+                }
+            }
+        });
     }
 
     //display stats

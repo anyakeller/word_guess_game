@@ -9,9 +9,6 @@ var version; //version
 var isPlay = false; //global check if the game is being played
 var currentG; //I forgot what this does
 
-//keps track of all the games
-var tracker = new Game();
-
 // Start Mode Button Listeners
 modes.click(function() {
     version = this.value;
@@ -28,14 +25,15 @@ modes.click(function() {
 // NEWG listener
 newG.click(function() {
     console.log("YAYY");
-    gamething(version);
     $("#modalthing").modal("hide");
+    gamething(version);
 });
 
 // Run Game
 function gamething(version) {
     currentG = new tos();
     console.log(version);
-    currentG.initplay();
     isPlay = true;
+    currentG.initplay();
+    currentG.playit();
 }
