@@ -29,6 +29,9 @@ newG.click(function() {
     gamething(version);
 });
 
+var left = $("#guess_left"); //new game button
+var used = $("#letters_used"); //new game button
+
 // Run Game
 function gamething(version) {
     currentG = new tos();

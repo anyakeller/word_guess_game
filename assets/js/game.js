@@ -69,16 +69,16 @@ class trek extends Game {
         }
         //console.log(arrranword);
         //var isWin = 0; //0 is playing, 1 is win, 2 is loss
-        var unusedchars = this.asciiletterBank;
+        var usedchars = [];
         return this.recursiveRound(
             arrranword,
-            unusedchars,
+            usedchars,
             max_tries,
             tries_used
         );
     }
 
-    recursiveRound(arrayleft, unused, max_tries, tries_used) {
+    recursiveRound(arrayleft, used, max_tries, tries_used) {
         // takes the array of the letters left to guess
         if (arrayleft.length == 0) {
             return true;
@@ -96,37 +96,34 @@ class trek extends Game {
             var isletter = id.asciiletterBank.indexOf(k);
             if (isletter == -1) {
                 alert("bad key!");
-            } else if (unused.indexOf(k) == -1) {
+            } else if (used.indexOf(k) != -1) {
                 alert("u used that already");
             } else {
                 $(document).off("keyup");
                 tries_used++;
                 console.log("tries left: " + (max_tries - tries_used));
+                used.push(k);
                 if (arrayleft.indexOf(k) == -1) {
                     //if not in word
                     console.log(k + " is not in the word");
                     return id.recursiveRound(
                         arrayleft,
-                        unused,
+                        used,
                         max_tries,
                         tries_used
                     );
                 } else {
                     console.log(k + " is in the word!");
                     var templeft = arrayleft;
-                    var tempunused = unused;
                     for (var j = 0; j < templeft.length; j++) {
                         if (templeft[j] === k) {
                             templeft.splice(j, 1);
                             j--;
                         }
                     }
-                    var whereisunusedk = unused.indexOf(k);
-                    tempunused.splice(whereisunusedk, 1);
-
                     return id.recursiveRound(
                         templeft,
-                        tempunused,
+                        used,
                         max_tries,
                         tries_used
                     );
