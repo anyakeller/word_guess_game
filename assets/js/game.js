@@ -70,22 +70,23 @@ class trek extends Game {
         //console.log(arrranword);
         //var isWin = 0; //0 is playing, 1 is win, 2 is loss
         var usedchars = [];
-        return this.recursiveRound(
-            arrranword,
-            usedchars,
-            max_tries,
-            tries_used
-        );
+        return this.oneRound(arrranword, usedchars, max_tries, tries_used);
     }
 
-    recursiveRound(arrayleft, used, max_tries, tries_used) {
-        // takes the array of the letters left to guess
-        if (arrayleft.length == 0) {
-            return true;
-        } else if (tries_used == max_tries) {
-            return false;
-        }
+    oneRound(arrayleft, usedchars, max_tries, tries_used) {
         var id = this;
+        var roundStatus = 0;
+
+        function checkForRoundEnd(arrayleft, tries_used) {
+            // takes the array of the letters left to guess
+            if (arrayleft.length == 0) {
+                return 1; //win
+            } else if (tries_used == max_tries) {
+                return 2; //loss
+            }
+            return 0; //still playing
+        }
+
         $(document).keyup(function(event) {
             console.log(arrayleft);
             var getkey = event.key;
@@ -96,22 +97,15 @@ class trek extends Game {
             var isletter = id.asciiletterBank.indexOf(k);
             if (isletter == -1) {
                 alert("bad key!");
-            } else if (used.indexOf(k) != -1) {
+            } else if (usedchars.indexOf(k) != -1) {
                 alert("u used that already");
             } else {
-                $(document).off("keyup");
                 tries_used++;
                 console.log("tries left: " + (max_tries - tries_used));
-                used.push(k);
+                usedchars.push(k);
                 if (arrayleft.indexOf(k) == -1) {
                     //if not in word
                     console.log(k + " is not in the word");
-                    return id.recursiveRound(
-                        arrayleft,
-                        used,
-                        max_tries,
-                        tries_used
-                    );
                 } else {
                     console.log(k + " is in the word!");
                     var templeft = arrayleft;
@@ -121,12 +115,20 @@ class trek extends Game {
                             j--;
                         }
                     }
-                    return id.recursiveRound(
-                        templeft,
-                        used,
-                        max_tries,
-                        tries_used
-                    );
+                }
+
+                roundStatus = checkForRoundEnd(arrayleft, tries_used);
+                if (roundStatus != 0) {
+                    $(document).off("keyup");
+                    if (roundStatus == 1) {
+                        console.log("U Win!");
+                        return;
+                    } else if (roundStatus == 2) {
+                        console.log("U lose :/");
+                        return;
+                    } else {
+                        console.log("You effing broke my program");
+                    }
                 }
             }
         });
