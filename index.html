@@ -68,6 +68,10 @@
         <div class="jumbotron jumbotron-fluid py-3" style="margin-bottom: 0px">
             <div class="container">
                 <h1 class="display-4">Word Guessing Game</h1>
+                <h2>
+                    NOTE: Didn't get the chance to implement game versions.
+                    Version buttons all default to TOS
+                </h2>
                 <p class="lead">
                     Star Trek Edition
                 </p>
@@ -81,33 +85,52 @@
         </nav>
         <!-- Content -->
         <div id="main" class="container py-3">
+            <span id="endGame"></span>
             <div class="row">
                 <!-- Game Space (hidden at first) -->
+                <span id="winloss"></span>
                 <div class="py-3 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div id="jumboGame" class="jumbotron jumbotron-fluid">
-                        <div class="container">
-                            <h4>Round Info</h4>
-                            <div id="round_info">
-                                <dl class="row">
-                                    <dt class="col-sm-3">Guesses Left</dt>
-                                    <dd id="guess_left" class="col-sm-9">
-                                        asdf
-                                    </dd>
-
-                                    <dt class="col-sm-3">Letters Used</dt>
-                                    <dd id="letters_used" class="col-sm-9">
-                                        asdf
-                                    </dd>
-                                </dl>
-                            </div>
+                    <div style="display: none" id="jumboGame" class="card">
+                        <div class="card-header">
+                            <h2>Round: <span id="rndnum"></span></h2>
+                            <p>Wins: <span id="wins"></span></p>
+                            <p>Losses: <span id="losses"></span></p>
                             <small class="text-muted">
                                 Instructions: Guess the word by pressing the
                                 letter you want to guess. Your guesses are
                                 limited in number so get rekt.
                             </small>
-                            <br /><br />
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-8 col-lg-8">
+                                    <h4>Type to Fill the Blanks</h4>
+                                    <h3 id="letterSpaces"></h3>
+                                    <button
+                                        type="button"
+                                        class="btn btn-success"
+                                        id="nxtRndBtn"
+                                        value="nxtRnd"
+                                    >
+                                        Start Next Round
+                                    </button>
+                                </div>
+                                <div class="col-md-4 col-lg-4">
+                                    <h4>Round Info</h4>
+                                    <p>
+                                        Guesses Left
+                                        <span id="guess_left"></span>
+                                    </p>
+                                    <p>
+                                        Letters Available
+                                        <small class="text-muted"
+                                            >Letters turn grey when used</small
+                                        >
 
-                            <div class="row" id="game_space"></div>
+                                        <span id="letters_used"> </span>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -188,9 +211,7 @@
             crossorigin="anonymous"
         ></script>
         <!-- Button listeners -->
-        <script>
-            //$("#jumboGame").hide();
-        </script>
+        <script></script>
         <!-- Game -->
         <script src="assets/js/game.js"></script>
         <script src="assets/js/htmlelements.js"></script>

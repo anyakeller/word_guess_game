@@ -7,7 +7,6 @@ var newG = $("#new_game"); //new game button
 //GLOBAL VARIABLES
 var version; //version
 var isPlay = false; //global check if the game is being played
-var currentG; //I forgot what this does
 
 // Start Mode Button Listeners
 modes.click(function() {
@@ -22,21 +21,30 @@ modes.click(function() {
     //confirmstartkey(version);
 });
 
+var currentG; //I forgot what this does
+var nxtRndBtn = $("#nxtRndBtn");
+
+var endGame = $("<div>");
+endGame.addClass("alert alert-danger");
+endGame.text("Out of fresh words.  Game Over.");
+endGame.attr({ role: "alert", id: "gameOver" });
+
 // NEWG listener
 newG.click(function() {
+    endGame.hide();
     console.log("YAYY");
     $("#modalthing").modal("hide");
-    gamething(version);
-});
-
-var left = $("#guess_left"); //new game button
-var used = $("#letters_used"); //new game button
-
-// Run Game
-function gamething(version) {
     currentG = new tos();
-    console.log(version);
     isPlay = true;
     currentG.initplay();
+});
+
+nxtRndBtn.click(function() {
+    nxtRndBtn.hide();
+    gamething(version);
+});
+// Run Game
+function gamething(version) {
+    console.log(version);
     currentG.playit();
 }
