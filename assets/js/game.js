@@ -204,13 +204,14 @@ class trek extends Game {
         // $(d).addClass(classname);
     }
 
-    updateBlanks(usedLetters) {
+    updateBlanks(correctLetters, usedLetters) {
         $(
             $(".letterBlankLetter").each(function(index) {
                 // console.log($(this).data("correctLetterValue"));
                 if (
-                    usedLetters.indexOf($(this).data("correctLetterValue")) !=
-                    -1
+                    correctLetters.indexOf(
+                        $(this).data("correctLetterValue")
+                    ) != -1
                 ) {
                     $(this).text(
                         String.fromCharCode($(this).data("correctLetterValue"))
